@@ -1,0 +1,52 @@
+//first solution
+public class Solution1{
+    public void partitionArray(int[] nums){
+        //traverse array to find the first even num
+        int firstEven = 0;
+        for(int i; i < nums.length; i++){
+            if(nums[i] % 2 == 0)
+                firstEven = i;
+                break;
+        }
+        for(int i = firstEven; i < nums.length; i++){
+            if(nums[i] % 2 == 1){
+                swap(nums, i, firstEven);
+                firstEven++;
+            }
+        }
+    }
+    
+    
+    public void swap(int[] nums, int pos1, int pos2){
+        int temp = nums[pos1];
+        nums[pos1] = nums[pos2];
+        nums[pos2] = temp;
+    }
+}
+
+
+pubic class Solution2{
+    public void partitionArray(int[] nums){
+        int start = 0;
+        int end = nums.length - 1;
+        while(start < end){
+            //find first even
+            while(nums[start] % 2 == 1 && start < end){
+                start++;
+            }
+            
+            //find first odd
+            while(nums[end] % 2 == 0 && start < end){
+                end--;
+            }
+            
+            if(start < end){
+                int temp = nums[end];
+                nums[end] = nums[start];
+                nums[start] = temp;
+                start++;
+                end--;
+            }
+        }
+    }
+}
